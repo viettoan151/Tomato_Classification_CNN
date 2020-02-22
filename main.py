@@ -31,9 +31,9 @@ class TomatoDataset(data.Dataset):
             idx = idx.tolist()
 
         feature_file = self.feature_dir + self.label_dataframe.iloc[idx, 1]
-        feature_data = np.load(feature_file)
+        feature_data = np.load(feature_file).astype(np.float32)
         feature_data = np.reshape(feature_data, (1, len(feature_data)))
-        feature_data = torch.from_numpy(feature_data)
+        feature_data = torch.from_numpy(feature_data.astype(np.float))
 
         label = self.label_dataframe.iloc[idx, 2]
         #label = torch.from_numpy(np.asarray([label]))
@@ -100,11 +100,11 @@ def test(args, model, device, test_loader):
 def main():
     # Training settings
     parser = argparse.ArgumentParser(description='PyTorch MNIST Example')
-    parser.add_argument('--batch-size', type=int, default=10, metavar='N',
+    parser.add_argument('--batch-size', type=int, default=1, metavar='N',
                         help='input batch size for training (default: 64)')
     parser.add_argument('--test-batch-size', type=int, default=1, metavar='N',
                         help='input batch size for testing (default: 1000)')
-    parser.add_argument('--epochs', type=int, default=5, metavar='N',
+    parser.add_argument('--epochs', type=int, default=50, metavar='N',
                         help='number of epochs to train (default: 14)')
     parser.add_argument('--lr', type=float, default=1.0, metavar='LR',
                         help='learning rate (default: 1.0)')

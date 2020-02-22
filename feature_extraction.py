@@ -8,7 +8,7 @@ import pandas as pd
 
 # Read image data
 # Red tomato
-is_training = True
+is_training = False
 
 classes = {'brown': 0, 'orange': 1, 'yellow': 2}
 
